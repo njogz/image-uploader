@@ -1,0 +1,12 @@
+<h1>Home Page</h1>
+<p>
+    <a href="/#/add-image">Add an image</a>
+</p>
+<ul>
+    <li ng-repeat='image in images'>{{image.title}}</li>
+</ul>
+<li ng-repeat='image in images'>
+    <a href="/#/image/{{image._id}}">
+        {{image.title}}
+    </a>
+</li>
