@@ -32,7 +32,15 @@ router.get('/:id', function(req, res) {
       	res.json(image);
     });
 });
+router.delete('/:id', function(req, res) {
+  console.log('Called');
+    var collection = db.get('images');
+    collection.findOne({ _id: req.params.id }, function(err, image){
+        if (err) throw err;
 
+      	res.json(image);
+    });
+});
 router.put('/:id', function(req, res){
     var collection = db.get('images');
     collection.update({
@@ -47,6 +55,7 @@ router.put('/:id', function(req, res){
         res.json(image);
     });
 });
+
 
 
 module.exports = router;

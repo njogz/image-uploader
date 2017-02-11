@@ -14,7 +14,11 @@ app.config(['$routeProvider', function($routeProvider){
         .when('/image/:id', {
         templateUrl: 'partials/images-form.html',
         controller: 'EditImageCtrl'
-    })
+       })
+       .when('/image/delete/:id', {
+        templateUrl: 'partials/image-delete.html',
+        controller: 'DeleteImageCtrl'
+       })
         .otherwise({
             redirectTo: '/'
         });
@@ -50,6 +54,22 @@ app.controller('EditImageCtrl', ['$scope', '$resource', '$location', '$routePara
 
         $scope.save = function(){
             Images.update($scope.image, function(){
+                $location.path('/');
+            });
+        }
+    }]);
+
+app.controller('DeleteImageCtrl', ['$scope', '$resource', '$location', '$routeParams',
+    function($scope, $resource, $location, $routeParams){
+        var Images = $resource('/api/images/:id');
+
+        Images.get({ id: $routeParams.id }, function(image){
+            $scope.image = image;
+        })
+
+        $scope.delete = function(){
+          console.log("Delete: " + $routeParams.id);
+            Images.delete({ id: $routeParams.id }, function(image){
                 $location.path('/');
             });
         }
