@@ -35,7 +35,7 @@ router.get('/:id', function(req, res) {
 router.delete('/:id', function(req, res) {
   console.log('Called');
     var collection = db.get('images');
-    collection.findOne({ _id: req.params.id }, function(err, image){
+    collection.remove({ _id: req.params.id }, function(err, image){
         if (err) throw err;
 
       	res.json(image);
