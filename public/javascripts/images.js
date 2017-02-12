@@ -1,4 +1,4 @@
-var app = angular.module('images', ['ngResource', 'ngRoute']);
+var app = angular.module('images', ['ngResource', 'ngRoute', 'ngFileUpload']);
 
 
 app.config(['$routeProvider', function($routeProvider){
@@ -32,13 +32,18 @@ app.controller('HomeCtrl', ['$scope', '$resource',
         });
     }]);
 
-app.controller('AddImageCtrl', ['$scope', '$resource', '$location',
-    function($scope, $resource, $location){
+app.controller('AddImageCtrl', ['$scope', '$resource', '$location', 'Upload',
+    function($scope, $resource, $location, Upload){
         $scope.save = function(){
-            var Images = $resource('/api/images');
-            Images.save($scope.image, function(){
-                $location.path('/');
-            });
+          $scope.upload($scope.image.file);
+        };
+        $scope.upload = function (file) {
+          Upload.upload({
+              url: 'api/images',
+              data: {file: file, 'title': $scope.image.title}
+          }).then(function () {
+              $location.path('/');
+          });
         };
     }]);
 

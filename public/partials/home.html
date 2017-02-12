@@ -6,6 +6,7 @@
     <li ng-repeat='image in images'>{{image.title}}</li>
 </ul>
 <li ng-repeat='image in images'>
+  <img src="images/{{image.image_path}}" />
     <a href="/#/image/{{image._id}}">
         {{image.title}}
     </a>

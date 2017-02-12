@@ -13,15 +13,16 @@ router.get('/', function(req, res){
 });
 
 router.post('/', function(req, res){
-    var collection = db.get('images');
-    collection.insert({
-        title: req.body.title,
-        description: req.body.description
-    }, function(err, image){
-        if (err) throw err;
-
-        res.json(image);
-    });
+  var collection = db.get('images');
+  collection.insert({
+      title: req.body.title,
+      description: req.body.description,
+      image_name: req.file.originalname,
+      image_path: req.file.filename
+  }, function(err, image){
+      if (err) throw err;
+      res.json(image);
+  });
 });
 
 router.get('/:id', function(req, res) {

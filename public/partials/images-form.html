@@ -1,6 +1,6 @@
 <h1>Add an image</h1>
 
-<form>
+<form enctype="multipart/form-data">
     <div class="form-group">
         <label>Title</label>
         <input class="form-control" ng-model="image.title"></input>
@@ -9,5 +9,7 @@
         <label>Description</label>
         <textarea class="form-control" ng-model="image.description"></textarea>
     </div>
+    <input type="file" ngf-select ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" ng-model="image.file"  >
     <input type="button" class="btn btn-primary"  value="Save" ng-click="save()"></input>
 </form>
